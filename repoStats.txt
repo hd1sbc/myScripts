@@ -1,5 +1,5 @@
 This file is automatically updated everytime it is pushed. Values are up-to-date
-
+View in "raw mode" (top right of GitHub) to see tables formatted correctly. Github's automatic rendering of this file changes the indents, causing the tables to look misaligned when they are not.
 
 ===================================================================================================
 KEY REPOSITORY VALUES:
