@@ -1,0 +1,64 @@
+This file is automatically updated everytime it is pushed. Values are up-to-date
+
+
+===================================================================================================
+KEY REPOSITORY VALUES:
+===================================================================================================
+Total Number Of Lines Of Code¹:	18,872
+Total Number Of Files:		258
+Total Number Of Words:		87,961
+Total Number Of Characters:	768,250
+
+1: the total number of lines of code is defined by the number of lines in files containing any of the follow extensions: .c, .h, .sh, .mk, .py, .cpp, .java, .pl, .rb
+===================================================================================================
+
+
+===================================================================================================
+ADVANCED REPOSITORY VALUES:
+===================================================================================================
+FILE BREAKDOWN-------------------------------------------------------------------------------------
+Total Number Of Code Files²:				191 (74.03%)
+Total Number Of Csv, Txt, Md, Man, and Yaml Files:	68 (26.36%)
+---------------------------------------------------------------------------------------------------
+
+LINES OF CODE BREAKDOWN----------------------------------------------------------------------------
+Total Number Of Lines Of Code Ignoring Whitespace³:		15,869
+Total Number Of Lines Of Code Ignoring Whitespace & Comments⁴:	11,917
+---------------------------------------------------------------------------------------------------
+
+2: the total number of code files is defined as files containing any of the follow extensions: .c, .h, .sh, .mk, .py, .cpp, .java, .pl, .rb
+3: the total number of lines of code ignoring whitespace removes empty lines or lines only with whitespace in the files mentioned in (1)
+4: the total number of lines of code ignoring whitespace and comments performs the same whitespace removal as (2) and also removes lines containing ONLY comments and block comments.
+	4a: removal of lines of code are defined as lines beginning with "//" or "#", optionally preceeded by exclusively whitespace
+	4b: removal of block comments is only accounted for in files that use "/* */" style block comments (.c, .h, .cpp, .java). Block comments in other languages are not accounted for, but do not exist in this repo, so the value is still accurate
+===================================================================================================
+
+
+===================================================================================================
+ADVANCED BREAKDOWN BY FILE TYPE - vals:
+===================================================================================================
+Parameter			|    c    |    h    |    sh    |    mk    |    py    |
+--------------------------------------------------------------------------------------
+Number Of Files			|   56    |   68    |   50     |   10     |    1     |
+Total Line Count		| 9,408   | 2,005   |  7,157   |   288    |   14     |
+Total Line Count No Whitespaces	| 7,977   | 1,584   |  6,096   |   200    |   12     |
+Total Line Count No Comments	| 5,530   | 1,280   |  4,915   |   180    |   12     |
+Total Number Of Words		| 40,946  | 4,557   | 41,307   |  1,109   |   42     |
+Total Number Of Chars		|377,096  | 74,157  | 307,113  |  9,649   |   235    |
+===================================================================================================
+
+
+===================================================================================================
+ADVANCED BREAKDOWN BY FILE TYPE - percent:
+===================================================================================================
+Parameter			|    c    |    h    |    sh    |    mk    |    py    |
+--------------------------------------------------------------------------------------
+Number Of Files			| 21.71%  | 26.36%  | 19.38%   |  3.88%   |  0.39%   |
+Total Line Count		| 49.85%  | 10.62%  | 37.92%   |  1.53%   |  0.07%   |
+Total Line Count No Whitespaces	| 50.27%  | 9.98%   | 38.41%   |  1.26%   |  0.08%   |
+Total Line Count No Comments	| 46.40%  | 10.74%  | 41.24%   |  1.51%   |  0.10%   |
+Total Number Of Words		| 46.55%  | 5.18%   | 46.96%   |  1.26%   |  0.05%   |
+Total Number Of Chars		| 49.09%  | 9.65%   | 39.98%   |  1.26%   |  0.03%   |
+===================================================================================================
+
+
