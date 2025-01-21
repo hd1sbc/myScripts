@@ -1,0 +1,46 @@
+.TH MYREALLOC 3 "2020" "MY REALLOC FUNCTION"
+.SH NAME
+.PP
+\fBmyRealloc\fR - realloc's char-based arrays
+.SH SYNOPSIS
+.PP
+\fBvoid* myRealloc(void* data);\fR
+
+\fBvoid* myRealloc(int increment, void* data);\fR
+
+\fBvoid* myRealloc(void* data, int currentSize);\fR
+
+\fBvoid* myRealloc(int increment, void* data, int currentSize);\fR
+.TP
+.B PARAMETERS
+\fBdata\fR - alloc'd data to be resized
+.br
+\fBincrement\fR - how much to increase the current size of the data by. This assumes the data has a proper null-terminator, null value, or sentinel value
+.br
+\fBcurrentSize\fR - current size of the data to be used if the data doesn't have a proper null-terminator, null value, or sentinel value
+.SH DESCRIPTION
+.PP
+This function realloc's char*'s and char**'s.
+
+If only 1 value is provided, the string is realloc'd to the current size plus the default value (128 for char* and 1 for char**).
+
+If the increment and data parameters are provided, the data is realloc'd to the current size plus the given increment value.
+
+If the data parameter and current size is provided, the data is realloc'd to the current size plus the default value (128 for char* and 1 for char**), where its current size is given
+
+If all 3 parameters are given, the data is realloc'd to the current size plus the given increment (128 for char* and 1 for char**), where its current size is given
+.SH RETURN VALUE
+.PP
+data type passed in (char* or char**)
+.SH EXAMPLES
+.PP
+char* str = <...some alloc'd string with chars...>; str = myRealloc(str); 	:- string will be alloc'd 128 bytes larger
+
+char* str = <...some alloc'd string with chars...>; str = myRealloc(10, str);	:- string will be alloc'd 10 bytes large
+
+char* str = <...some alloc'd string with chars...>; str = myRealloc(str, 12);	:- the string will be alloc'd to a size of 140 bytes and a end-of-string character (\\0) isn't required
+
+char** strArr = <...some alloc'd string array with string in it...>; strArr = myRealloc(strArr);	:- the string array will be alloc'd one char* pointer larger, and the new index will be a string alloc'd with 128 bytes
+.SH ASSOCIATED SOURCE CODE DIRECTORIES AND/OR FILES
+.PP
+lib/genericCFunctions/myRealloc.c

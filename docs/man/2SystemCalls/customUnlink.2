@@ -1,0 +1,36 @@
+.TH UNLINK 2 "2024" "UNLINK CALL"
+.SH NAME
+.PP
+\fBunlink\fR - removes a file
+.SH SYNOPSIS
+.PP
+\fB#include <customUnlink.h>\fR
+
+\fBint unlink(const char* pathIn);\fR
+.TP
+.B PARAMETERS
+\fBpathIn\fR - path of file to be removed
+.TP
+
+\fBLD_PRELOAD=overWrittenSysCalls.so; export LD_PRELOAD\fR
+.SH DESCRIPTION
+.PP
+The program overwrites the the unlink function to warn users about unlinking a file in the repository directory based on the permissions set for each file in the filesAndFolders.csv (specifically in the rmd columns).
+
+The program will only present a warning message if the source of the function call is from the terminal or gui application. If the function call is from a program in the repository, it will not throw a warning message.
+
+If the unlink call is valid, it will use the built-in unlink function call
+
+description
+.SH RETURN VALUE
+.PP
+On success, returns 0. On error, returns -1, but doesn't set an errNo value
+.SH ERRORS
+.PP
+none
+.SH SEE ALSO
+.PP
+unlink(2)
+.SH ASSOCIATED SOURCE CODE DIRECTORIES AND/OR FILES
+.PP
+src/overWrittenSysCalls/customUnlink.c

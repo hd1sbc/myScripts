@@ -1,0 +1,35 @@
+.TH MYINSERT 3 "2022" "MY INSERT FUNCTION"
+.SH NAME
+.PP
+\fBmyInsert\fR - inserts a string or chars into an existing string at a given index or inserts a string in a string array at a given index
+.SH SYNOPSIS
+.PP
+\fBvoid* insert(void* originalData, void* dataToAdd, int position);\fR
+.TP
+.B PARAMETERS
+\fBoriginalData\fR - original data (string or string array)
+.br
+\fBdataToAdd\fR - char or string ot be added
+.br
+\fBposition\fR - index to add data
+.SH DESCRIPTION
+.PP
+This function adds:
+.br
+- a char or string to a string at a given index
+.br
+- a string to a string array at a given index
+.br
+.SH RETURN VALUE
+.PP
+data type of original data (char* or char**)
+.SH EXAMPLES
+.PP
+char c = x; char* str = <...some string...>; str = myInsert(str, x, 2); 	:- inserts the char at index to in the string
+
+char* str1 = <...some string...>; char* str2 = <...some string...>; str2 = myInsert(str2, str1, 2); 	:- inserts the string at index to in the string
+
+char** strArr = <...some string array...>; char* str2 = <...some string...>; strArr = myInsert(strArr, str2, 2); 	:- inserts the string at index to in the string array
+.SH ASSOCIATED SOURCE CODE DIRECTORIES AND/OR FILES
+.PP
+lib/genericCFunctions/myInsert.c

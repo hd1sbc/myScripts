@@ -1,0 +1,63 @@
+.TH CONVERT 3 "2024" "CONVERT FUNCTION"
+.SH NAME
+.PP
+\fBconvert\fR - converts between various data types
+.SH SYNOPSIS
+.PP
+\fBvoid* convert(void* data, char* nameOfDataTypeToConvertTo);\fR
+.TP
+.B PARAMETERS
+\fBdata\fR - data that will be converted
+.br
+\fBnameOfDataTypeToConvertTo\fR - a string containing the data type to convert to
+.SH DESCRIPTION
+.PP
+This function converts between a variety of different data types. Accepted 1st parameter data types:
+- char*
+.br
+- int
+.br
+- char
+.br
+- double
+.br
+- database structs
+
+Accepted names of 2nd parameter:
+.br
+- string/char*		:- converts to string
+.RS
+-If the 1st parameter is a char* data type and contains a '.' or '/', then it will treat the input as a file path and open the file and convert it to a char*. This is helpful when looking to open files.
+.RE
+- int			:- converts from int to string or vice versa
+.br
+- char			:- converts from char to string or vice versa
+.br
+- double		:- converts from double to string or vice versa
+.br
+- database structs	:- converts from a csv-formatted string to the given database struct or vice versa
+.SH RETURN VALUE
+.PP
+- char*
+.br
+- int
+.br
+- char
+.br
+- double
+.br
+- database structs
+
+Note that convertBasic.c does the same thing as convert, but without the ability to work with database structs. It only used in libraries that don't use the database library (database.mk/database.h)
+.SH EXAMPLES
+.PP
+struct someStruct** myStruct = <...alloc'd struct array...>. char* x = convert(x, "string"); 	:- converts struct array to csv-formatted string
+
+char* someFile = <...some file as string...>; struct someStruct** myStruct = convert(someFile, "db_dbNum");	:- converts csv-formatted string to struct array
+
+char c = 'h'; char* str = convert(c, "string");		:- converts 'h' to "h" (null-terminated too)
+
+int x = 1; char* str = convert(x, "string"); 		:- converts the int to string
+.SH ASSOCIATED SOURCE CODE DIRECTORIES AND/OR FILES
+.PP
+lib/genericCFunctions/convert.c

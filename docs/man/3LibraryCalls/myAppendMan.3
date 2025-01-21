@@ -1,0 +1,33 @@
+.TH MYAPPEND 3 "2022" "MY APPEND FUNCTION"
+.SH NAME
+.PP
+\fBmyAppend\fR - inserts a string or chars into an existing string at the end of the string or inserts a string in a string array at the end
+.SH SYNOPSIS
+.PP
+\fBvoid* myAppend(void* originalData, void* dataToAdd);\fR
+.TP
+.B PARAMETERS
+\fBoriginalData\fR - original data (string or string array)
+.br
+\fBdataToAdd\fR - char or string ot be added
+.SH DESCRIPTION
+.PP
+This function uses myAppend() function, but just automatically fills in the position parameter (3rd parameter) by finding the size of the data.
+
+This function adds:
+.br
+- a char or string to a string at the end of a string
+.br
+- a string to a string array at the end of a string array
+.br
+.SH RETURN VALUE
+.PP
+data type of original data (char* or char**)
+.SH EXAMPLES
+.PP
+char c = x; char* str = <...some string...>; str = myAppend(str, x); 	:- appends the char to the string
+
+char** strArr = <...some string array...>; char* str2 = <...some string...>; strArr = myAppend(strArr, str2); 	:- inserts the string at the end of the string array
+.SH ASSOCIATED SOURCE CODE DIRECTORIES AND/OR FILES
+.PP
+lib/genericCFunctions/myInsert.c

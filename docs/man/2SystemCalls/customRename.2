@@ -1,0 +1,36 @@
+.TH RENAME 2 "2024" "RENAME CALL"
+.SH NAME
+.PP
+\fBrename\fR - renames files
+.SH SYNOPSIS
+.PP
+\fB#include <customRename.h>\fR
+
+\fBint rename(const char* oldPathIn, const char* newPathIn);\fR
+.TP
+.B PARAMETERS
+\fBoldPathIn\fR - current path
+.br
+\fBnewPathIn\fR - new path
+.TP
+
+\fBLD_PRELOAD=overWrittenSysCalls.so; export LD_PRELOAD\fR
+.SH DESCRIPTION
+.PP
+The program overwrites the the rename function to warn users about renaming a file in the repository directory based on the permissions set for each file in the filesAndFolders.csv (specifically in the rmd columns).
+
+The program will only present a warning message if the source of the function call is from the terminal or gui application. If the function call is from a program in the repository, it will not throw a warning message.
+
+If the rename call is valid, it will use the built-in unlink function call
+.SH RETURN VALUE
+.PP
+On success, returns 0. On error, returns -1, but doesn't set an errNo value
+.SH ERRORS
+.PP
+none
+.SH SEE ALSO
+.PP
+rename(2)
+.SH ASSOCIATED SOURCE CODE DIRECTORIES AND/OR FILES
+.PP
+- src/overWrittenSysCalls/customRename.c

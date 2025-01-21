@@ -1,0 +1,43 @@
+.TH LOADINGBAR 3 "2023" "LOADING BAR FUNCTION"
+.SH NAME
+.PP
+\fBloadingBarC\fR - prints a loading bar to standard output
+.SH SYNOPSIS
+.PP
+\fBlbParams* loadingBarC(int expectedDurationIn, int removeTextBoolIn, char* loadingBarMsgIn);\fR
+.TP
+.B PARAMETERS
+\fBexpectedDurationIn\fR - the expected duration of the function the loaing bar is showing for
+.br
+\fBremoveTextBoolIn\fR - boolean to remove loading bar text and loading bar message after the function finishes
+.br
+\fBloadingBarMsgIn\fR - the message to be printed above the loading bar
+.SH DESCRIPTION
+.PP
+This function prints a loading bar in a background thread with increasing values of percentage complete (based on pre-set expected duration) when running c programs.
+
+It can be run in the background and stopped by calling the closeLoadingBarC(lbParams* lbParamsIn) function. 
+
+The loading bar will automatically close itself (since it is run in the background) after 30 seconds.
+
+If the loading bar percentage complete reaches 90% before the program is finished, it will hold the value of 90% until the program is finished.
+
+Whenever the program finished, regardless of the percentage complete, a graceful percentage completed routine will run to smooth out the percent complete values. For example, if closeLoadingBarC() function is called while the percentage complete is only 50%, the program will change the percentage complete to 75%, wait 0.3 seconds, then switch to 90% complete, wait 0.25 seconds, then print 100%.
+
+The loading bar line and (if not an empty string) the pre-loading bar message will be cleared automatically if removeTextBoolIn is 1, 0 if not. 
+.SH RETURN VALUE
+.PP
+lbParams*
+.SH EXAMPLES
+.PP
+lbParams* l; loadingBarC(2, 1, ""); <...run some function...>; closeLoadingBarC(l);	:- will open and close a loading bar with an expected duration of 2 seconds and removing the loading bar line from the screen
+
+lbParams* l; loadingBarC(2, 0, "HI"); <...run some function...>; closeLoadingBarC(l);	:- will open and close a loading bar with an expected duration of 2 seconds, printing "HI" above the loading bar, and not removing the loading bar line or the loading bar message from the screen
+
+lbParams* l; loadingBarC(2, 1, "HI"); <...run some function...>; closeLoadingBarC(l);	:- will open and close a loading bar with an expected duration of 2 seconds, printing "HI" above the loading bar, and remove the loading bar line and the loading bar message from the screen
+.SH NOTES
+.PP
+WARNING: because of multi-threading, two loading bars cannot be ongoing at the same time
+.SH ASSOCIATED SOURCE CODE DIRECTORIES AND/OR FILES
+.PP
+lib/genericCFunctions/loadingBarC.c

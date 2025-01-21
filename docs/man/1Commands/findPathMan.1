@@ -1,0 +1,69 @@
+.TH FINDPATH 1 "2019" "FIND PATH MANUAL"
+.SH NAME
+.PP
+\fBfindPath\fR
+\fBfindSysObjMain.o\fR
+.SH SYNOPSIS
+.PP
+\<binNameOrAlias\\>  \[options\] \<file identifier\\>
+.SH DESCRIPTION
+.PP
+This program finds:
+.RS
+.br
+- The file path (including file name) given a file id
+.br
+- The symlink path associated with a file based on file ID
+.br
+- The file ID based on file name or path
+.br
+- The file ID of the associated symlink based on file name or path
+.br
+.RE
+The program uses filesAndFolders.csv values in order to find these values.
+.SH OPTIONS
+.PP
+-f      :- finds the literal file path (including file name) or id instead of the associated symlink path or symlink id
+.SH MODES
+.PP
+-\fBFind Path\fR	:- finds the file path or symlink path when the file identifier input argument is an integer
+.br
+-\fBFind Id\fR		:- finds the id of the file name (or path) or id of the associated symlink when the file identifier input argument is not an integer
+.SH EXAMPLES
+.PP
+\<binName\> 1             :- Returns the symlink path for the file whose ID in the files and folders DB is 1
+
+\<binName\> 10            :- Say the file with the ID of 10 is a symlink, then this will return the file path of that file, not its associated symlink
+
+ \<binName\> -f 1          :- Returns the file path for the file whose ID in the files and folders DB is 1. It doesn't return the symlink path
+
+ \<binName\> -f 10         :- Say the file with the ID of 10 is a symlink, this does the same as \<binName\> 10
+
+ \<binName\> myScripts     :- Returns the ID of the symlink within the files and folders DB that is associated with that file path or name
+
+ \<binName\> symLink\_0.sl  :- Return the ID of that file within the files and folders DB
+
+ \<binName\> -f myScripts  :- Returns the ID of the file (not the symlink) within the files and folders DB
+.SH NOTES
+.PP
+\fBCAUTION!! THIS PROGRAM CAN BREAK YOUR DEVICE\fR
+.br
+\fICircular References And Prevention\fR
+.RS
+- findSysObjMain.o, findSysObjMain.c, and the other files in lib/findFilesAndFolders/ directory contain references to its own object file. This creates a circular loop.
+.br
+- To avoid this, a previous version of findSysObjMain.c that contains the hardcoded values is statically compiled. That object file is then set as findPath.
+.RS
+- Since it is statically compiled and doesn't contain circular references, it can be used to compile the version of findSysObjMain.c that contains the findPath.
+.RE
+- In order to make this new version usable throughout the system, it needs to be compiled statically as well.
+.RE
+\fIShell Startup\fR
+.RS
+- This program's use in .\*rc files (like bashrc and zshrc) must be compiled correctly or it can break the entire shell, including its startup
+.br
+- This program's use across almost all programs require it be compiled and run perfectly. One should always keep a backup of a working version of the statically compiled object file
+.RE
+.SH ASSOCIATED SOURCE CODE DIRECTORIES AND/OR FILES
+.PP
+- lib/findFilesAndFolders

@@ -1,0 +1,163 @@
+.TH DATABASE 1 "2022" "DATABASE MANAGEMENT MANUAL"
+.SH NAME
+.PP
+\fBdatabase.sh\fR - a database management tool
+.SH SYNOPSIS
+.PP
+database.sh [interactive options]
+.SH DESCRIPTION
+.PP
+This is a custom database management software that generates associated files and c code to be used for manipulation of contents of associated tables. This interactive program contains the ability to:
+
+.RS
+- create a database
+.br
+- remove a database
+.br
+- edit structural aspects of an existing database
+.br
+.RS
+- renaming a column
+.br
+- removing a column
+.br
+- adding a column
+.br
+- changing a column's default value
+.br
+- changing a column's data type
+.br
+.RE
+.RE
+
+Any changes made to the structure of the database will be automatically reflected in all associated files and code.
+
+\fI\fBDatabase Management Accepted Values\fR\fR
+.br
+The accepted values for the various components of the database are listed as the user nagivates the menus. Below is breakdown:
+.br
+.RS
+\fB- Database Name:\fR
+.RS
+- name must only include Latin alphabet characters (case-insensitive). No numbers or special characters permitted
+.RS
+- name must be less than 128 characters long
+- cannot have the same name as an existing database
+.RE
+.RE
+
+\fB- Column Names:\fR
+.RS
+- name must only include Latin alphabet characters (case-insensitive). No numbers or special characters permitted, including "\_"
+.br
+- name must be less than 128 characters long
+.br
+- column names cannot be duplicated
+.br
+- the first column (with column id of 0) will be auto-generated with column name: id, column data type: int, and column default val: -1. It is auto-generated and its values cannot be changed
+.RE
+
+\fB- Column Data Types (must be exact matches, case sensitive):\fR
+.RS
+- int
+.br
+- bool
+.br
+- float
+.br
+- char
+.br
+- string
+.br
+.RE
+
+\fB- Column Default Values: must be a valid value for that data type\fR
+.RS
+- strings can be empty
+.br
+- bool cannot have values other than 0 or 1
+.br
+- int can only contain integers (with a possible negative sign in front of it)
+.br
+- other values follow the same logic
+.br
+.RE
+.RE
+
+\fI\fBGenerated C Code Capabilities\fR\fR
+.br
+The generated c code creates a seperate struct for each new database where each column is a member of the struct with the datatype associated with that column. Edits to the structural aspects of the database do not create a new struct; the existing one is updated to reflect the changes. For each database (and its associated struct), the generated c code provides the ability to:
+
+.RS
+- convert from a csv file (with matching columns and valid values) to an array of structs where each column is a member of that struct with the associated data type
+.br
+- convert from a struct array to a csv-formatted string (which can be written to a file)
+.br
+- add elements to a struct
+.br
+- remove elements from a struct based on ID column (column 0)
+.br
+- remove elements from a struct based on a value and a column number
+.br
+- find all rows where a value in a given column matches a given equality (current valid equalities: =,!=, >, <, >=, <=)
+.br
+- deep copy a struct and/or a struct array (any pointers (like char\*) in the struct will be copied into a new one)
+.br
+- set struct member values where the name of the member is stored in a variable
+.br
+- get values of a struct member where the name of the member is stored in a variable
+.br
+- get the size of a struct array
+.br
+- free a struct and/or a struct array
+.br
+.RE
+
+These function do not require the struct type to be specified. Using gcc generics, the data type for the struct/struct array parameter is automatically detected and the associated function with that struct is called.
+
+Although written in c, the functions associated with the abilities above (as well as all c code in this repo) have been built with memory leak prevention as a priority, including rigorous testing with valgrind.
+
+Following the use of this program (database.sh), the header files need to be updated. By using autoExec.sh function when running a c program with the database library included, the header files and libraries will be automatically updated to reflect the changes in the c code.
+.SH OPTIONS
+.PP
+None. This program is interactive.
+.SH MODES
+.PP
+The program has 4 modes and 5 sub-modes:
+.br
+.RS
+- \fBcreate a database\fR     :- will create a new database with a csv file (including header row), c code, and column information added to tableColTypeList.csv
+.br
+- \fBremove a database\fR     :- will remove a database, its csv file, associated c code, and column information in tableColTypeList.csv
+.br
+.RS
+- it will also list other files in the repo directory that contain the name of the database in case the user wants to delete it from those files not created associated with this program
+.RE
+.br
+- \fBedit database\fR         :- will provide options (listed below) to change structural components of an existing database. Values will be auto-updated in all associated c code files, csv, and tableColTypeList.csv
+.br
+- \fBdo nothing (exit)\fR     :- graceful exit
+.RE
+
+The "edit structural aspects of an existing database" has the following 5 sub-modes:
+.br
+.RS
+- renaming a column
+.br
+- removing a column
+.br
+- adding a column
+.br
+- changing column's default value
+.br
+- changing column's data type
+.br
+.RE
+.SH SEE ALSO
+.PP
+- autoExecDocs.md
+.SH ASSOCIATED SOURCE CODE DIRECTORIES AND/OR FILES
+.PP
+- src/dbCreateAndManage/
+.br
+- lib/databaseFunctions/

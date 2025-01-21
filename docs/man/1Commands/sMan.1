@@ -1,0 +1,29 @@
+.TH S 1 "2017" "CD STACK MANUAL"
+.SH NAME
+.PP
+\fBs\fR - shows the current cd stack
+.SH SYNOPSIS
+.PP
+s
+.SH DESCRIPTION
+.PP
+A function that is works with the other components of the cd stack code. This function shows the stack of current, previous, and forward directories based on previous use of the cd command in the current shell session.
+
+If any of these values are empty, the program will print so.
+
+Values for each of the 3 parameters (current, previous, and forward directory) are printed on the same line, separated by a space.
+
+The forward stack will be emptied everytime the cd command is used. If the "f" or "b" command are used, the forward stack will not automatically be emptied.
+
+This program works with both bash and zsh.
+.SH OPTIONS
+.PP
+none
+.SH SEE ALSO
+.PP
+- b.md
+.br
+- f.md
+.SH ASSOCIATED SOURCE CODE DIRECTORIES AND/OR FILES
+.PP
+- src/cdStack/

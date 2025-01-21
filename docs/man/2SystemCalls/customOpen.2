@@ -1,0 +1,40 @@
+.TH OPEN 2 "2024" "OPEN CALL"
+.SH NAME
+.PP
+\fBopen\fR - checks permissions in filesAndFolders.csv to see if file can be opened; throws a warning if not 
+.SH SYNOPSIS
+.PP
+\fB#include <customOpen.h>\fR
+
+\fBint open(const char* pathIn, int flagsIn, ...);\fR
+.TP
+.B PARAMETERS
+\fBpathIn\fR - absolute path of the file to be opened
+.br
+\fBflags\fR - flags used for built-in open function call
+.TP
+
+\fBLD_PRELOAD=libOverWrittenSysCalls.so; export LD_PRELOAD\fR
+.SH DESCRIPTION
+.PP
+The program overwrites the the open function to warn users about opening a file in the repository directory  based on the permissions set for each file by in the filesAndFolders.csv (specifically in the rwe and rmd columns).
+
+It also checks if csv files are valid databases before opening a file.
+
+The columns "rwe" and "rmd" in filesAndFolders.csv refer to the permissions for each file. The rwe column refers to the same permissions (read, write, and execute) as in Linux and the value follows the same format as Linux permissions (0-7). The rmd column stands for rename, move, and delete. The values in its column follows the same integer naming conventions as Linux rwe permissions, with the order of rmd matching that of rwe. For example, a value of 6 in the rwe column grants read and write permissions. A value of 6 in the rmd column grants renaming and moving permissions.
+
+The program will only present a warning message if the source of the function call is from the terminal or gui application. If the function call is from a program in the repository, it will not throw a warning message.
+
+If the open call is valid, it will use the built-in open function call
+.SH RETURN VALUE
+.PP
+On success, returns 0. On error, returns -1, but doesn't set an errNo value
+.SH ERRORS
+.PP
+None
+.SH SEE ALSO
+.PP
+open(2)
+.SH ASSOCIATED SOURCE CODE DIRECTORIES AND/OR FILES
+.PP
+- src/overWrittenSysCalls/customOpen.c

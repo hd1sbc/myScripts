@@ -1,0 +1,10 @@
+id,packageName,systemsToInstallOn
+0,gcc,all
+1,python3,all
+2,ruby-full,all
+3,perl,all
+4,build-essential,all
+5,gh,all
+6,terminator,all
+7,dotnet-sdk-8.0,Ubuntu
+8,zenity,all

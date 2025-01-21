@@ -1,0 +1,40 @@
+.TH WRITE 2 "2024" "WRITE CALL"
+.SH NAME
+.PP
+\fBwrite\fR - writes files to permanent memory
+.SH SYNOPSIS
+.PP
+\fB#include <customWrite.h>\fR
+
+\fBint write(int fd, const void* buf, size_t bufLen);\fR
+.TP
+.B PARAMETERS
+\fBfd\fR - file descriptor
+.br
+\fBbuf\fR - characters to write
+.br
+\fBbufLen\fR - size of the buffer
+.TP
+
+\fBLD_PRELOAD=overWrittenSysCalls.so; export LD_PRELOAD\fR
+.SH DESCRIPTION
+.PP
+The program overwrites the write function to include functionality to warn users about writing permanently changing a protected file in the repository directory, based on the permissions set for each file by in the filesAndFolders.csv (specifically in the rwe columns).
+
+If the file being written is a .csv file, it checks if the contents of it is a valid database.
+
+The columns "rwe" and "rmd" in filesAndFolders.csv refer to the permissions for each file. The rwe column refers to the same permissions (read, write, and execute) as in Linux and the value follows the same format as Linux permissions (0-7). The rmd column stands for rename, move, and delete. The values in its column follows the same integer naming conventions as Linux rwe permissions, with the order of rmd matching that of rwe. For example, a value of 6 in the rwe column grants read and write permissions. A value of 6 in the rmd column grants renaming and moving permissions.
+
+The program will only present a warning message if the source of the function call is from the terminal or gui application. If the function call is from a program in the repository, it will throw a warning message.
+.SH RETURN VALUE
+.PP
+On success, returns 0. On error, returns -1, but doesn't set an errNo value
+.SH ERRORS
+.PP
+none
+.SH SEE ALSO
+.PP
+write(2)
+.SH ASSOCIATED SOURCE CODE DIRECTORIES AND/OR FILES
+.PP
+src/overWrittenSysCalls/customWrite.c

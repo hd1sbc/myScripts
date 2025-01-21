@@ -1,0 +1,165 @@
+.TH STANDARDS_CONVENTIONS_FORMATS 5 "2019" "STANDARD, CONVENTIONS, AND FORMATS FOR COMMENTS MANUAL"
+.SH Top-Level Function Comments
+.PP
+- \fBPurpose:\fR to describe what the function does at a high level
+.br
+- \fBLocation:\fR above the start of the function
+.br
+- \fBSpacing:\fR space after comment initializer
+.br
+- \fBCapitalization:\fR capital first letter
+.br
+- \fBSubpoints:\fR new line, tab after comment initializer followed by "- ". Capital first letter
+.SH Bash Additional Function Comments
+.PP
+- \fBPurpose:\fR to describe the parameters to function
+.br
+- \fBLocation:\fR above the start of the function, below top-level function comment
+.br
+- \fBSpacing:\fR no space after comment initializer, followed by a semi-colon and space
+.br
+- \fBContent:\fR Args:
+.RS
+- For every arg, add the argument number followed by " - " then descriptive name in camel case (unless very long)
+.RS
+- If the comment needs more description, add it in parentheses
+.RE
+- Each argument should end with ';'. Older code might end with ','
+.RE
+.SH In-Function Comments
+.PP
+.TP
+.B Comments For Small Bits Of Code
+- \fBDefinition:\fR comments associated with 1-3 lines of code
+.br
+- \fBLocation:\fR to the right of the code or just above it
+.br
+- \fBSpacing:\fR no space after comment initializer
+.br
+- \fBCapitalization:\fR no capitalization of 1st letter
+.br
+- \fBContent:\fR whatever needs to be said. If multi-line comment, follow the same pattern
+.TP
+.TP
+.B Comments For Medium Bits Of Code
+- \fBDefinition:\fR comments associated with 4-9 lines of code
+.br
+- \fBLocation:\fR above the first line of the block of code
+.br
+- \fBSpacing:\fR space after comment initializer is optional
+.br
+- \fBCapitalization:\fR capitalization of 1st letter is recommended, but up to me
+.br
+- \fBContent:\fR whatever needs to be said. If multi-line comment, all other lines follow "Small Bits Of Code" rules
+.TP
+.TP
+.B Comments For Large Bits Of Code
+- \fBDefinition:\fR comments associated with 10+ lines of code
+.br
+- \fBLocation:\fR above the first line of the block of code
+.br
+- \fBSpacing:\fR space after comment initializer
+.br
+- \fBCapitalization:\fR capital 1st letter
+.br
+- \fBContent:\fR General statement about its purpose. If multi-line comment, all other lines follow "Small Bits Of Code" rules
+.SH Code Block Seperators
+.PP
+.TP
+.B Dashed Line ("-")
+- \fBDefinition:\fR lines of "-"
+.br
+- \fBLocation:\fR next to a comment for big or medium bits of code. No space after end of comment
+.br
+- \fBLength:\fR up to 99th column (in vim, cursor should be at column 100), irregardless of tabs
+.br
+- \fBUsage:\fR
+.RS
+.RS
+- to segment blocks of code to make it easier to read and see how they connect
+.br
+- to segment top level blocks of standardized code
+.RS
+- global variables
+.br
+- sourcing
+.RE
+.RE
+.RE
+.TP
+.TP
+.B Dashed-Space Line ("- -")
+- \fBDefinition:\fR lines of "- -"
+.br
+- \fBLocation:\fR next to a comment for medium bits of code. No space after end of comment
+.br
+- \fBLength:\fR up to 99th column (in vim, cursor should be at column 100), irregardless of tabs
+.RS
+.RS
+- If 99th column ends in a space, leave it
+.RE
+- \fBUsage:\fR to break up segments of code already withing a block of "-". Otherwise the same.
+.RE
+.TP
+.TP
+.B Plus Sign ("+")
+- \fBDefinition:\fR lines of "+"
+.br
+- \fBLocation:\fR next to a comment for big bits of code. No space after end of comment
+.br
+- \fBLength:\fR up to 99th column (in vim, cursor should be at column 100), irregardless of tabs
+.br
+- \fBUsage:\fR for largest blocks of code
+.TP
+.TP
+.B Equals Sign ("=")
+- \fBDefinition:\fR lines of "="
+.br
+- \fBLocation:\fR above and below a comment for big bits of code or code with lots of functions. Also used in one line at the end of block of code. Comment must be in all caps
+.br
+- \fBLength:\fR up to 99th column (in vim, cursor should be at column 100), irregardless of tabs
+.br
+- \fBUsage:\fR for large blocks of code or standardized blocks of function code (usually in header files)
+.SH Global Code Blocks
+.PP
+.TP
+.B Global Vars
+- \fBWhen:\fR in all files (unless files were seperated out and share a set of global vars)
+.br
+- \fBWhere:\fR at the top of files. For c files, below include statements
+.br
+- \fBContent:\fR
+.RS
+    - comment initializer with no leading whitespace followed by a space, followed by "GLOBAL VARS" (all caps), followed immediately (no space) by "-" until cursor reaches 100th column (last "-" will be at column 99)
+    - At the end of global vars section, conclude with comment initializer with no leading whitespace followed by "-" until the cursor reaches the 100th column (last "-" will be at column 99)
+.RE
+.TP
+.TP
+.B Sourcing
+- \fBWhen:\fR in all files where a global variable needs to be assigned a value after compilation or ensure file values are valid
+.br
+- \fBWhere:\fR at the top of files below global vars section
+.br
+- \fBContent:\fR
+.RS
+    - comment initializer with no leading whitespace followed by a space, followed by "SOURCING" (all caps), followed immediately (no space) by "-" until cursor reaches 100th column (last "-" will be at column 99)
+    - At the end of global vars section, conclude with comment initializer with no leading whitespace followed by "-" until the cursor reaches the 100th column (last "-" will be at column 99)
+.RE
+.TP
+.TP
+.B File Variable For Error Message
+- \fBWhen:\fR in all production files (test files don't need it)
+.br
+- \fBWhere:\fR at the bottom of the global vars section
+.br
+- \fBContent:\fR
+.RS
+    - comment initializer with no leading whitespace followed by a space, followed by "Error Msg Constant Vars" or "Error Message Constant Vars" ("Vars" can be replaced with "Var")
+    - file name var follows below it (see Standardized Variables section below). Global vars ending "-" comment follows immediately below that
+.RE
+.TP
+.TP
+.B Standardized Variables
+- \fBFILE NAME:\fR all files must have a way to get the file name and/or path. The variable begins with "F\_" and is follwed by a shortened version of file name
+.br
+- \fBFUNCTION NAME:\fR a variable to store the current function name. Must always be "FF"

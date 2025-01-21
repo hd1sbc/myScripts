@@ -1,0 +1,163 @@
+.TH EXECC 1 "2019" "EXECUTE C MANUAL"
+.SH NAME
+.PP
+none - part of autoExecute.sh
+.SH Defintions
+.PP
+- \fBImplementation Files\fR	:- files with all source code and ending with ".c" (not ".h")
+.br
+- \fBSource Header Files\fR	:- header files associated with implementation files
+.br
+- \fBLibrary Header Files\fR	:- header files associated with a library file, which just includes the source header files for all of its source code members as well as the library header files for any libraries included in it
+.br
+- \fBIncluded Library\fR		:- a library that is included in another library
+.br
+- \fBObject File\fR		:- compiled source code
+.br
+- \fBShare Object File\fR		:- compiled libraries
+.br
+- \fBNon-Standard Include\fR	:- an include statement that points to a library not in the standard c library. They are differentiated by  using double quotes instead of < >
+.br
+- \fBNon-Standard Library\fR	:- a library I created and not part of the c standard library
+.br
+- \fBNon-Main Files\fR		:- c implemenation files that do not contain a main function. They are designed to be part of a library
+.br
+- \fBMain-Function Files\fR	:- c implementation files containing a main function
+.br
+- \fBSimple C Program\fR		:- a c implementation file that doesn't contain any non-standard libraries and doesn't include any non-standard headers
+.br
+- \fBComplex C Program\fR		:- a main-function file in which at least one of the includes points to a header file not in the c standard library
+.br
+- \fBComplex C Program No Lib\fR	:- a type of complex c program in which none of the includes points to a library header file
+.br
+- \fBComplex C Program Lib\fR	:- a main-function file in which at least one of the includes points to a library header file
+.SH Outline Of How It Works
+.PP
+The program is used to automatically create and/or update related ".c", ".h", ".o", and ".so" files for c programs, then compiles and runs them. It has a 4 step process:
+
+- Determine the type of file
+.br
+- Find associated files based on file type
+.br
+- Update dependencies if needed by comparing the last modified dates of the associated files and determine if it needs to be updated
+.br
+- Compile and run the program
+.br
+.SH Details Of How It Works
+.PP
+\fBDetermine the type of file\fR
+
+The program determines, based on the existince of a main function, what type of c file the input file path is. The valid options are main-function files or non-main-function files.
+
+\fBFind Associated Files\fR
+
+- Extract all non-standard includes
+.br
+- For each file base name, determine if it is a source header file or library header file
+.br
+.RS
+- Find the file base name of each include statement
+.RS
+- Remove the "#include "" and trailing """ from each include line
+.br
+- Remove the ".h" (or whatever file extension)
+.RE
+- See if the base name with extension ".mk" exists in the build directory. If so, it is a library header file. Otherwise, it is a source header file
+.RE
+
+\fBUpdate Dependencies\fR
+
+- For each library header file (if one exists), open the associated makefile in the build directory
+.RS
+- Extract all object files the line containing the OBJ\_FILES variable
+.br
+- For each object file, find the associated implementation file and source header files
+.RS
+- If the implementation file was modified more recently than the header file, update the header file (see details in section "Create And Update Header File"
+.br
+- If either the implementation file or the header file were modified more recently than the object file, recompile the object file and the makefile
+.RE
+- Extract all included libraries found in the line containing the INCLUDED\_LIB\_NAME variable
+.br
+- For each included library, find its associate makefile and recursively run the outer most for loop until there are no more included libraries
+.RE
+- If any changes were made to any of the associated files in the library, recompile the makefile
+.br
+- For each non-standard header file not pointing to a library header file, create and/or update source header file
+
+\fBCreate And Update Header\fR
+
+Purpose: to update header files to include any new additions in global variables, new functions, changes in function definitions, and more
+
+- If a non-main file, then extract all global variables, structs, typedefs, function definitions, defines, and includes
+.br
+- Where necessary, manipulate the strings to match formatting
+.br
+.RS
+- For example, function definitions would remove anything after (and including) "{" on the function definition line and replace with ';'
+.RE
+.br
+- If a source header file already exists, extract the defines from the header file and remove all contents of the header file
+.br
+- Add extracted contents from non-main file to updated header file.
+.br
+.RS
+- If header file previously existed, replace the extracted defines from the implementation file with the extracted defines from the source header file. This is a legacy feature that I chose to retain, even if it makes things a bit more complicated
+.RE
+.br
+- Recompile non-main file
+
+\fB Compilation And Execution Of Original File\fB
+
+\fISimple C Program\fR
+
+- The program is compiled using gcc with only basic options
+.br
+- The program is then run with valgrind
+.br
+
+\fIComplex C Program Lib\fR
+
+- After all dependencies have been updated, the file is compiled using gcc
+.br
+- All object files from all of the libraries are included in the compilation
+.br
+- All shared object files are included
+.br
+- All object files associated with non-library header files are included, if a non-library header file was included
+.br
+- The path to look for header files is set to the symlinks and include directories
+.br
+- The path to look for shared object files is set to lib directory
+.br
+- The compiled object file will be placed in the compiled directory
+.br
+- The object file is executed using valgrind
+
+\fIComplex C Program No Lib\fR
+
+- After all dependencies have been updated, the file is compiled using gcc
+.br
+- All object files associated with non-library header files are included
+.br
+- The path to look for header files is set to the symlinks and include directories
+.br
+- The compiled object file will be placed in the compiled directory
+.br
+- The object file is executed using valgrind
+
+\fINon-Main File\fR
+
+- After all dependencies have been updated, the file is compiled using gcc
+.br
+- All object files associated with non-library header files are included
+.br
+- The path to look for header files is set to the symlinks and include directories
+.br
+- The compiled object file will be placed in the compiled/compiledHeaders/ directory
+.br
+- The object file is NOT executed
+.SH ASSOCIATED SOURCE CODE DIRECTORIES AND/OR FILES
+.PP
+- src/executeCode
+- autoExecDocs.md

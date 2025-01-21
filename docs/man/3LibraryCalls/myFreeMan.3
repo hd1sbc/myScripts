@@ -1,0 +1,33 @@
+.TH MYFREE 3 "2019" "MY FREE FUNCTION"
+.SH NAME
+.PP
+\fBmyFree\fR - free's a variety of different datatypes and arrays
+.SH SYNOPSIS
+.PP
+\fBvoid myFree(void* data);\fR
+
+\fBvoid myFree(void* data, int printBool);\fR
+
+\fBvoid myFree(void* data, int printBool, char* dataType);\fR
+.TP
+.B PARAMETERS
+\fBdata\fR - data type to be free'd
+.br
+\fBprintBool\fR - value to print data while free'ing (1), to print but not free (2), or not print at all (default, 0)
+.br
+\fBdataType\fR - deprecated value. No need to use it
+.br
+.SH DESCRIPTION
+.PP
+This function free's a variety of different data types, arrays, double pointer arrays, and more. It also free's structs and any pointers in those structs (such as a struct member with data type char*).
+.SH RETURN VALUE
+.PP
+none
+.SH EXAMPLES
+.PP
+char* x = <...some alloc'd string with chars...>; myFree(x);
+
+struct someStruct** myStruct = <...some alloc'd string with chars...>; myFree(myStruct, 1);
+.SH ASSOCIATED SOURCE CODE DIRECTORIES AND/OR FILES
+.PP
+lib/genericCFunctions/myFree.c

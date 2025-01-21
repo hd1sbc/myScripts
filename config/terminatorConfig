@@ -1,0 +1,92 @@
+[global_config]
+[keybindings]
+  cycle_next = ""
+  cycle_prev = ""
+  move_tab_right = ""
+  move_tab_left = ""
+  next_tab = <Primary>Tab
+  prev_tab = <Primary><Shift>Tab
+[profiles]
+  [[default]]
+    background_darkness = 0.95
+    background_type = transparent
+    palette = "#1f2229:#d41919:#5ebdab:#fea44c:#367bf0:#9755b3:#49aee6:#e6e6e6:#198388:#ec0101:#47d4b9:#ff8a18:#277fff:#962ac3:#05a1f7:#ffffff"
+    use_theme_colors = True
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+  [[OSCP]]
+    [[[child0]]]
+      type = Window
+      parent = ""
+      order = 0
+      position = 0:35
+      maximised = True
+      fullscreen = False
+      size = 1910, 1009
+      title = OSCP
+      last_active_window = True
+    [[[child1]]]
+      type = Notebook
+      parent = child0
+      order = 0
+      labels = VPN, Notes, Lab1
+      last_active_term = a2205d82-8633-4825-a689-4bf697f02cf8, 04934922-bc7c-4fbd-b7cf-d2c07b00ad94, 0f6fceab-2edb-4e38-b4f9-5a85eff048a7
+      active_page = 0
+    [[[terminal2]]]
+      type = Terminal
+      parent = child1
+      order = 0
+      profile = default
+      uuid = a2205d82-8633-4825-a689-4bf697f02cf8
+      directory = ""
+    [[[terminal3]]]
+      type = Terminal
+      parent = child1
+      order = 1
+      profile = default
+      uuid = 04934922-bc7c-4fbd-b7cf-d2c07b00ad94
+    [[[terminal4]]]
+      type = Terminal
+      parent = child1
+      order = 2
+      profile = default
+      uuid = 0f6fceab-2edb-4e38-b4f9-5a85eff048a7
+      directory = ~/Downloads
+  [[Code]]
+    [[[child0]]]
+      type = Window
+      parent = ""
+      order = 0
+      position = 0:35
+      maximised = True
+      fullscreen = False
+      size = 1910, 1009
+      title = Coding
+      last_active_window = True
+    [[[child1]]]
+      type = Notebook
+      parent = child0
+      order = 0
+      labels = Run, View
+      last_active_term = ccf86ee5-d232-4297-8b80-6430f98f93a6, 96ac1951-7f72-4f62-a95d-69ebeb884702
+      active_page = 0
+    [[[terminal2]]]
+      type = Terminal
+      parent = child1
+      order = 0
+      profile = default
+      uuid = ccf86ee5-d232-4297-8b80-6430f98f93a6
+    [[[terminal3]]]
+      type = Terminal
+      parent = child1
+      order = 1
+      profile = default
+      uuid = 96ac1951-7f72-4f62-a95d-69ebeb884702
+[plugins]
+

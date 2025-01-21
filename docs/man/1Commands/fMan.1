@@ -1,0 +1,26 @@
+.TH F 1 "2017" "CD FORWARD MANUAL"
+.SH NAME
+.PP
+\fBf\fR - cd's forward a directory
+.SH SYNOPSIS
+.PP
+f
+.SH DESCRIPTION
+.PP
+A function that is works with the other components of the cd stack code. This function moves to the most recent directory from which the user ran the "b" command in the current shell.
+
+The forward stack will be emptied everytime the cd command is used. If the "f" or "b" command are used, the forward stack will not automatically be emptied.
+
+This program works with both bash and zsh.
+.SH OPTIONS
+.PP
+none
+.SH SEE ALSO
+.PP
+- b.md
+.br
+- s.md
+.SH ASSOCIATED SOURCE CODE DIRECTORIES AND/OR FILES
+.PP
+- src/cdStack/
+

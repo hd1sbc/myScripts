@@ -1,0 +1,70 @@
+.TH STANDARDS_CONVENTIONS_AND_FORMATS 5 "2020" "STANDARDS, CONVENTIONS, AND FORMATS FOR HELP MENU MANUAL"
+.PP
+.SH When To Use And Where To Put It
+- \fBWhen To Use\fR with any primary file, regardless of file type, in the src directory that will either be associated with a alias or executable
+.br
+- \fBWhere\fR
+.RS
+- in a seperate function titled helpMenu, followed by some descriptor of the file name or what it does
+- in file with main function or effective main function, unless the help menu is exceptionally long and requires its own file
+.RE
+.SH Contents
+- \fBHelp Menu Descriptor\fR
+.RS
++++\<Name of program (with spaces, all caps)\> - HELP MENU+++	Relative File Path: $0
+.RE
+- \fBPurpose\fR
+.RS
+Purpose: \<quick summary of what it does\>
+.RE
+- \fBDetails\fR (optional)
+.RS
+Details: <more details if the purpose would be too long>
+.RE
+- \fBNames\fR (optional)
+.RS
+Executable File Name: <bin name>
+.br
+Aliases: {otherAliases}
+.RE
+- \fBOptions\fR
+.RS
+Options: (if no options, write "none" on same line as this. Ex: Options: none)
+.br
+option1		:- Explanation (with capital first letter)
+.RE
+- \fBUsage\fR
+.RS
+Usage:
+.RS
+\<generic format of usage\> \[options\] \<requiredArgs\> | \{mainArgs\}
+.RE
+.RE
+- \fBExamples\fR
+.RS
+Examples:
+.RS
+\<binName\> | \<binName\> \<requiredArgs\>	:- Default, no arguments provided. If necessary, explain what it does or what minimum args provided does
+.br	
+\<binName\> \[someOption\] \<requiredArgs\>	:- explain what it does
+.RE
+.RE
+- \fBNotes\fR (optional)
+.RS
+Notes:
+.RS
+[any important notes]
+.RE
+.RE
+.SH Notes
+- Name of program should be in plain English with spaces, not in camelSpace. Extend the title to make it more understandable
+.br
+- Deatils section is optional and should really only be used if purpose would be too long
+.br
+- If no options are required, show that, otherwise, show an example with required options
+.br
+- If no man page, use "--more" option. If no "--more" is necessary, ignore it all together
+.br
+- always use ":-" to explain what the example does
+.br
+- All ":-" should line up

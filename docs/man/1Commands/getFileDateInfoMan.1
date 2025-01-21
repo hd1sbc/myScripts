@@ -1,0 +1,27 @@
+.TH GETFILEDATEINFO 1 "2024" "GET FILE DATE INFO MANUAL"
+.SH NAME
+.PP
+\fBgetFileDateInfo.sh\fR - provides an easy-to-read version of a file's last modified and last accessed date or compares those two values between two files
+.SH SYNOPSIS
+.PP
+getFileDateInfo.sh \<filePath1\> [filePath2]
+.SH DESCRIPTION
+.PP
+\fBSingle File Input\fR		:- provides easy-to-read information about the last modified and last accessed dates of a file.
+.br
+\fBDouble File Input\fR		:- provides easy-to-read information about the difference between last modified and last accessed dates of two files.
+.SH OPTIONS
+.PP
+-h, --help  :- prints help menu
+.SH MODES
+.PP
+- single file input     :- only one file path is provided. Compares against today's date
+- double file input     :- two (and no more) file paths are provided. Compares the differences in dates between them
+.SH EXAMPLES
+.PP
+\<binNameOrAlias\> file1	:- prints how long ago the file was last accessed and modified
+
+\<binNameOrAlias\> file1 file2	:- prints how long ago the file1 was last accessed and modified compared to file2
+.SH ASSOCIATED SOURCE CODE DIRECTORIES AND/OR FILES
+.PP
+- src/getFileDateInfo.sh

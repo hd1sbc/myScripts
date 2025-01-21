@@ -1,0 +1,5 @@
+create static .a file from all obj files:
+find compiled/compiledHeaders/ -type f -name '*.o' | xargs ar rcs libstaticGenericC.a
+
+compile them:
+gcc -o findSysObjMain2 findSysObjMain.c -LMYSCRIPTSVAR/lib -lstaticGenericC -IMYSCRIPTSVAR/include -IMYSCRIPTSVAR/dep/symLinks

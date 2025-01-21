@@ -1,0 +1,34 @@
+.TH RMDIR 2 "2024" "RMDIR CALL"
+.SH NAME
+.PP
+\fBrmdir\fR - removes an empty directory
+.SH SYNOPSIS
+.PP
+\fB#include <customRmDir.h>\fR
+
+\fBint rmdir(const char* pathIn);\fR
+.TP
+.B PARAMETERS
+\fBpathIn\fR - directory to be removed
+.TP
+
+\fBLD_PRELOAD=overWrittenSysCalls.so; export LD_PRELOAD\fR
+.SH DESCRIPTION
+.PP
+The program overwrites the the rmdir function to warn users about removing a directory in the repository directory based on the permissions set for each file in the filesAndFolders.csv (specifically in the rmd columns).
+
+The program will only present a warning message if the source of the function call is from the terminal or gui application. If the function call is from a program in the repository, it will not throw a warning message.
+
+If the rmdir call is valid, it will use the built-in rmdir function call
+.SH RETURN VALUE
+.PP
+On success, returns 0. On error, returns -1, but doesn't set an errNo value
+.SH ERRORS
+.PP
+none
+.SH SEE ALSO
+.PP
+rmdir(2)
+.SH ASSOCIATED SOURCE CODE DIRECTORIES AND/OR FILES
+.PP
+src/overWrittenSysCalls/customRmDir.c
